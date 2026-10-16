@@ -1,0 +1,22 @@
+name: Quality Gate - SonarCloud
+on:
+  push:
+    branches: ["main"]
+jobs:
+  sonarcloud:
+    name: Analisis SonarCloud
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del codigo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Analisis
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITGUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}
+        with:
+          args: >
+            -Dsonar.organization=ricardoariasm762
+            -Dsonar.projectKey=ricardoariasm762_Laboratorio_Sonar
